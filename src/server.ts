@@ -3,10 +3,10 @@ import "express-async-errors";
 import express, { Request, Response, NextFunction } from "express";
 import path from "path";
 import { productRouter } from "./routes";
-import { userRoutes } from "./routes/userRoutes";
+import { userRoutes } from "./routes/UserRoutes";
 import { categoryRoutes } from "./routes/CategoryRoutes";
-import { routerAuth } from "./routes/LoginRouters";
-import { clienteRouter } from "./routes/routerCliente";
+import { routerAuth } from "./routes/LoginRoutes";
+import { patientRouter } from "./routes/PatientsRoutes";
 import "./database";
 import session from "express-session";
 import flash from "connect-flash"
@@ -43,7 +43,7 @@ app.use(productRouter);
 app.use(userRoutes);
 app.use(categoryRoutes);
 app.use(routerAuth);
-app.use(clienteRouter);
+app.use(patientRouter);
 
 app.use((err: Error, request: Request, response: Response, next: NextFunction) => {
   if (err instanceof Error) {

@@ -13,5 +13,3 @@ CRUD made with Node.js, Express, TypeScript, TypeORM, EJS &amp; SQLite.
 - The CRUD will be avaiable at `http://localhost:3000`.
 
 
-preguntar como condicionar datos duplicados en actualizacion de registros
-

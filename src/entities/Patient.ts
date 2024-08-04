@@ -1,8 +1,8 @@
 import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn, OneToMany } from "typeorm";
 import { v4 as uuid } from "uuid";
 
-@Entity("cliente")
-class Cliente {
+@Entity("paciente")
+class Patient {
 
   @PrimaryColumn()
   id: string;
@@ -36,4 +36,4 @@ class Cliente {
 
 }
 
-export { Cliente };
+export { Patient };
