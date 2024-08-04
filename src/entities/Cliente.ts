@@ -1,6 +1,5 @@
 import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn, OneToMany } from "typeorm";
 import { v4 as uuid } from "uuid";
-import { Factura } from "./Factura";
 
 @Entity("cliente")
 class Cliente {
@@ -22,9 +21,6 @@ class Cliente {
   
   @Column()
   direccion: string;
-
-  @OneToMany(() => Factura, factura => factura.cliente)
-  facturas: Factura[];
 
   @CreateDateColumn()
   created_at: Date;
