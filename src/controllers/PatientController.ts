@@ -18,13 +18,13 @@ class PatientController{
 
         }).then(() => {
           request.flash("succes", "paciente creado exitosamente")
-          response.redirect("/pacientes")
+          response.redirect("/patient")
           });
         
       } catch (err) {
         request.flash("error", "Error al crear el paciente", err.toString());
         console.log(request.body)
-        response.redirect("/pacientes");
+        response.redirect("/patient");
         
       }
   
@@ -37,12 +37,12 @@ class PatientController{
       try {
         await deletePatientService.delete(id).then(() => {
           request.flash("succes", "Paciente eliminado exitosamente")
-          response.redirect("/pacientes")
+          response.redirect("/patient")
           });
         
       } catch (err) {
         request.flash("error", "Error al eliminar el Paciente", err.toString());
-        response.redirect("/pacientes");
+        response.redirect("/patient");
         
       }
   }
@@ -54,7 +54,7 @@ class PatientController{
 
     const paciente = await getPatientDataService.getData(id);
 
-    return response.render("paciente/edit", {
+    return response.render("patient/edit", {
       paciente: paciente
     });
   }
@@ -63,7 +63,7 @@ class PatientController{
 
     const pacientes = await listPatientsService.list();
 
-    return response.render("pacientes/index", {
+    return response.render("patient/index", {
       pacientes: pacientes
     });
   }
@@ -75,13 +75,13 @@ class PatientController{
 
     try {
       const pacientes = await searchPatientService.search(search);
-      response.render("paciente/search", {
+      response.render("patient/search", {
         pacientes: pacientes,
         search: search
       });
     } catch (err) {
       request.flash("error", "Error al crear el paciente", err.toString());
-        response.redirect("/pacientes");
+        response.redirect("/patient");
       
     }
   }
@@ -100,12 +100,12 @@ class PatientController{
         direccion,
       }).then(() => {
         request.flash("succes", "Paciente actualizado exitosamente")
-          response.redirect("/pacientes")
+          response.redirect("/patient")
         
       });
     } catch (err) {
       request.flash("error", "Error al crear el paciente", err.toString());
-        response.redirect("/pacientes");
+        response.redirect("/patient");
     }
 
   }  

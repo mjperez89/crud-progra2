@@ -6,16 +6,16 @@ import auth from "../lib/auth";
 const patientRouter = Router()
 const partientController = new PatientController()
 
-patientRouter.get("/pacientes",auth.isLoggedIn, partientController.handleListPatient);
+patientRouter.get("/patient",auth.isLoggedIn, partientController.handleListPatient);
 
 patientRouter.get("/addPatient",auth.isLoggedIn, (request, response) => {
-  response.render("paciente/add")
+  response.render("patient/add")
 });
 
-patientRouter.post("/add-paciente",auth.isLoggedIn, partientController.handleCreatePatient);
-patientRouter.get("/editPaciente",auth.isLoggedIn, partientController.handleGetPatientData);
-patientRouter.post("/edit-paciente",auth.isLoggedIn, partientController.handleUpdatePatient);
-patientRouter.post("/delete-paciente",auth.isLoggedIn, partientController.handleDeletePatient);
-patientRouter.get("/searchPaciente",auth.isLoggedIn, partientController.handleSearchPatient);
+patientRouter.post("/add-patient",auth.isLoggedIn, partientController.handleCreatePatient);
+patientRouter.get("/editPatient",auth.isLoggedIn, partientController.handleGetPatientData);
+patientRouter.post("/edit-patient",auth.isLoggedIn, partientController.handleUpdatePatient);
+patientRouter.post("/delete-patient",auth.isLoggedIn, partientController.handleDeletePatient);
+patientRouter.get("/searchPatient",auth.isLoggedIn, partientController.handleSearchPatient);
 
 export { patientRouter}
