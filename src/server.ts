@@ -3,7 +3,7 @@ import "express-async-errors";
 import express, { Request, Response, NextFunction } from "express";
 import path from "path";
 import { productRouter } from "./routes";
-import { userRoutes } from "./routes/UserRoutes";
+import { userRoutes } from "./routes/userRoutes";
 import { categoryRoutes } from "./routes/CategoryRoutes";
 import { routerAuth } from "./routes/LoginRoutes";
 import { patientRouter } from "./routes/PatientsRoutes";

@@ -7,14 +7,17 @@ interface IPatient {
     name: string;
     email: string;
     telefono: string;
+    ciudad: string;
+    provincia: string;
     dni: string;
     direccion: string;
+    id_category: string;
   }
 
   class PatientService {
 
-    async create({ name, email, telefono, dni, direccion,  }: IPatient) {
-      if (!name || !email || !telefono || !dni || !direccion ) {
+    async create({ name, email, telefono, dni, ciudad, provincia,  direccion, id_category  }: IPatient) {
+      if (!name || !email || !telefono || !dni || !ciudad || !provincia || !direccion || !id_category) {
         throw new Error("Por favor rellene todos los campos.");
       }
   
@@ -32,7 +35,7 @@ interface IPatient {
         throw new Error("El mail de usuario ingresado ya existe");
       }
   
-      const paciente = parientsRepository.create({ name, email, telefono, dni, direccion, });
+      const paciente = parientsRepository.create({ name, email, telefono, dni, ciudad, provincia, direccion, id_category });
   
       await parientsRepository.save(paciente);
   
@@ -83,25 +86,27 @@ interface IPatient {
         .orWhere("email like :search", { search: `%${search}%` })
         .orWhere("telefono like :search", { search: `%${search}%` })
         .orWhere("dni like :search", { search: `%${search}%` })
+        .orWhere("ciudad like :search", { search: `%${search}%` })
+        .orWhere("provincia like :search", { search: `%${search}%` })
         .orWhere("direccion like :search", { search: `%${search}%` })
+        .orWhere("id_category like :search", { search: `%${search}%` })
         .getMany();
   
       return paciente;
   
     }
   
-    async update({ id, name, email, telefono, dni, direccion }: IPatient) {
+    async update({ id, name, email, telefono, dni, ciudad, provincia, direccion, id_category }: IPatient) {
       const parientsRepository = getCustomRepository(PatientRepository);
   
       const paciente = await parientsRepository
         .createQueryBuilder()
         .update(Patient)
-        .set({ name, email, telefono, dni, direccion })
+        .set({ name, email, telefono, dni, ciudad, provincia, direccion, id_category })
         .where("id = :id", { id })
         .execute();
   
       return paciente;
-  // hola
     }
   }
   

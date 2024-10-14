@@ -1,10 +1,12 @@
 import { Request, Response } from "express";
 import { helpers } from "../lib/helpers";
 import { PatientService } from "../services/PatientService";
+import { CategoryService } from "../services/CategoryService";
+
 
 class PatientController{
   async handleCreatePatient(request: Request, response: Response) {
-      const { name, email, telefono, dni, direccion } = request.body;
+      const { name, email, telefono, dni, ciudad, provincia, direccion, id_category } = request.body;
   
       const createPatientService = new PatientService();
   
@@ -14,7 +16,10 @@ class PatientController{
           email,
           telefono,
           dni,
+          ciudad,
+          provincia,
           direccion,
+          id_category
 
         }).then(() => {
           request.flash("succes", "paciente creado exitosamente")
@@ -29,6 +34,18 @@ class PatientController{
       }
   
   }
+
+  async handleAddPatient(request: Request, response: Response) {
+    const categoryService = new CategoryService();
+    try {
+      const categories = await categoryService.list();
+      response.render("patient/add", { category: categories });
+    } catch (err) {
+      request.flash("error", "Error al obtener las categorías", err.toString());
+      response.redirect("/patients");
+    }
+  }
+
   async handleDeletePatient(request: Request, response: Response) {
       const { id } = request.body;
   
@@ -46,18 +63,24 @@ class PatientController{
         
       }
   }
+
   async handleGetPatientData(request: Request, response: Response) {
     let { id } = request.query;
     id = id.toString();
 
+    const categoryService = new CategoryService();
+
     const getPatientDataService = new PatientService();
 
     const paciente = await getPatientDataService.getData(id);
+    const category = await categoryService.list()
 
     return response.render("patient/edit", {
-      paciente: paciente
+      paciente: paciente,
+      category: category
     });
   }
+
   async handleListPatient(request: Request, response: Response) {
     const listPatientsService = new PatientService();
 
@@ -67,16 +90,21 @@ class PatientController{
       pacientes: pacientes
     });
   }
+
   async handleSearchPatient(request: Request, response: Response) {
     let { search } = request.query;
     search = search.toString();
+
+    const categoryService = new CategoryService();
 
     const searchPatientService = new PatientService();
 
     try {
       const pacientes = await searchPatientService.search(search);
+      const category = await categoryService.list()
       response.render("patient/search", {
         pacientes: pacientes,
+        category: category,
         search: search
       });
     } catch (err) {
@@ -85,8 +113,9 @@ class PatientController{
       
     }
   }
+  
   async handleUpdatePatient(request: Request, response: Response) {
-    const { id, name, email, telefono, dni, direccion } = request.body;
+    const { id, name, email, telefono, dni, ciudad, provincia, direccion, id_category } = request.body;
 
     const updatePatientService = new PatientService();
 
@@ -97,7 +126,10 @@ class PatientController{
         email, 
         telefono, 
         dni,
+        ciudad,
+        provincia,
         direccion,
+        id_category
       }).then(() => {
         request.flash("succes", "Paciente actualizado exitosamente")
           response.redirect("/patient")

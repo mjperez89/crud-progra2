@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn, OneToMany } from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn, JoinColumn, ManyToOne } from "typeorm";
 import { v4 as uuid } from "uuid";
+import { Categorias } from "./Category";
 
 @Entity("paciente")
 class Patient {
@@ -22,11 +23,18 @@ class Patient {
   @Column()
   direccion: string;
 
-  @CreateDateColumn()
-  created_at: Date;
+  @Column()
+  provincia: string;
 
-  @UpdateDateColumn()
-  updated_at: Date;
+  @Column()
+  ciudad: string;
+
+  @Column()
+  id_category: string
+
+  @ManyToOne(() => Categorias, categoria => categoria.patient)
+  @JoinColumn({ name: 'id_category' })
+  category: Categorias
 
   constructor() {
     if (!this.id) {

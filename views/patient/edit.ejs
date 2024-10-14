@@ -42,7 +42,7 @@
     </div>
   </nav>
   <br>
-  <div class="container">
+  <div class="container row centered">
     <div class="text-center">
       <h2>Tabla de Pacientes
       </h2>
@@ -57,16 +57,52 @@
         </div>
       </div>
       <br>
-      <br>
       <div class="row">
         <div class="col-6">
           <label for="email" class="form-label">Email</label>
           <input type="text" name="email" id="email" class="form-control" value="<%= paciente.email %>">
         </div>
+        <br>
         <div class="col-6">
           <label for="telefono" class="form-label">Teléfono</label>
           <input type="text" name="telefono" id="telefono" class="form-control" value="<%= paciente.telefono %>">
         </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-6">
+          <label for="provincia" class="form-label">Ciudad</label>
+          <input type="text" name="ciudad" id="ciudad" class="form-control" value=<%= paciente.ciudad %>">
+        </div>
+        <br>
+      <div class="col-6">
+        <label for="provincia" class="form-label">Provincia</label>
+        <select name="provincia" id="provincia" class="form-select" value= <%= paciente.provincia %>">">
+          <option value="" selected disabled>Selecione su Provincia</option>
+            <option value="Mendoza">Mendoza</option>
+            <option value="San Luis">San Luis</option>
+            <option value="La Rioja">La Rioja</option>
+            <option value="Tucumán">Tucumán</option>
+            <option value="Tierra del Fuego">Tierra del Fuego</option>
+            <option value="Chubut">Chubut</option>
+            <option value="La Pampa">La Pampa</option>
+            <option value="Catamarca">Catamarca</option>
+            <option value="Salta">Salta</option>
+            <option value="Misiones">Misiones</option>
+            <option value="Rio Negro">Rio Negro</option>
+            <option value="Cordoba">Córdoba</option>
+            <option value="Santa Fe">Santa Fe</option>
+            <option value="Entre Rios">Entre Rios</option>
+            <option value="Formosa">Formosa</option>
+            <option value="Buenos Aires">Buenos Aires</option>
+            <option value="Neuquén">Neuquén</option>
+            <option value="San Juan">San Juan</option>
+            <option value="Santiago del Estero">Santiago del Estero</option>
+            <option value="Jujuy">Jujuy</option>
+            <option value="Chaco">Chaco</option>
+            <option value="Corrientes">Corrientes</option>
+            <option value="Santa Cruz">Santa Cruz</option>
+        </select>
       </div>
       <br>
       <div class="row">
@@ -77,7 +113,20 @@
         <div class="col-6">
           <label for="direccion" class="form-label">Direccion</label>
           <input type="text" name="direccion" id="direccion" class="form-control" value="<%= paciente.direccion %>">
-          
+        </div>
+        </div>
+      <br>
+      <div class="row">
+        <div class="col-6">
+          <label for="id_category" class="form-label">Categoria</label>
+          <select name="id_category" id="id_category" class="form-select">
+            <option disabled selected>Seleccione una Categoria</option>   
+            <% category.forEach(function(categoria) { %>
+              <option value="<%= categoria.id %>"> 
+                <%= categoria.nombre %> 
+              </option>
+            <% }) %>
+          </select>
         </div>
       </div>
       <br>

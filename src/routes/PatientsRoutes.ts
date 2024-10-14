@@ -8,10 +8,7 @@ const partientController = new PatientController()
 
 patientRouter.get("/patient",auth.isLoggedIn, partientController.handleListPatient);
 
-patientRouter.get("/addPatient",auth.isLoggedIn, (request, response) => {
-  response.render("patient/add")
-});
-
+patientRouter.get("/addPatient", auth.isLoggedIn, partientController.handleAddPatient);
 patientRouter.post("/add-patient",auth.isLoggedIn, partientController.handleCreatePatient);
 patientRouter.get("/editPatient",auth.isLoggedIn, partientController.handleGetPatientData);
 patientRouter.post("/edit-patient",auth.isLoggedIn, partientController.handleUpdatePatient);
