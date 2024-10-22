@@ -58,8 +58,9 @@
             <th scope="col">Telefono</th>
             <th scope="col">Dni</th>
             <th scope="col">Direccion</th>
-            <th scope="col">Ciudad</th>
             <th scope="col">Provincia</th>
+            <th scope="col">Ciudad</th>
+            <th scope="col">Categoria</th>
             <th scope="col">Acciones</th>
           </thead>
           <tbody>
@@ -81,10 +82,13 @@
                   <%= patient.direccion %>
                 </td>
               </td>
+              <%= patient.provincia %>
+            </td>
+              </td>
               <%= patient.ciudad %>
                 </td>
-                </td>
-                  <%= patient.provincia %>
+              </td>
+              <%= patient.category %>
                 </td>
                       <td>
                         <div class="row">
