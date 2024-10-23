@@ -66,47 +66,31 @@
           <tbody>
             <% pacientes.forEach(function(patient) { %>
               <tr>
+                <td><%= patient.name %></td>
+                <td><%= patient.email %></td>
+                <td><%= patient.telefono %></td>
+                <td><%= patient.dni %></td>
+                <td><%= patient.direccion %></td>
+                <td><%= patient.provincia %></td>
+                <td><%= patient.ciudad %></td>
+                <td><%= patient.category %></td>
                 <td>
-                  <%= patient.name %>
+                  <div class="row">
+                    <div class="col">
+                      <form action="./editPatient" method="GET">
+                        <input type="hidden" name="id" value="<%= patient.id %>">
+                        <button type="submit" class="btn edit-btn"><i class="bi bi-pencil"></i></button>
+                      </form>
+                    </div>
+                    
+                    <div class="col">
+                      <form action="./delete-patient" method="POST">
+                        <input type="hidden" name="id" value="<%= patient.id %>">
+                        <button type="submit" class="btn delete-btn"><i class="bi bi-trash"></i></button>
+                      </form>
+                    </div>
+                  </div>
                 </td>
-                <td>
-                  <%= patient.email %>
-                </td>
-                <td>
-                  <%= patient.telefono %>
-                </td>
-                <td>
-                  <%= patient.dni %>
-                </td>
-                <td>
-                  <%= patient.direccion %>
-                </td>
-              </td>
-              <%= patient.provincia %>
-            </td>
-              </td>
-              <%= patient.ciudad %>
-                </td>
-              </td>
-              <%= patient.category %>
-                </td>
-                      <td>
-                        <div class="row">
-                          <div class="row">
-                            <form action="./editPatient" method="GET">
-                              <input type="hidden" name="id" value="<%= patient.id %>">
-                              <button type="submit" class="btn edit-btn"><i class="bi bi-pencil"></i></button>
-                            </form>
-                          </div>
-                          <div class="row"></div>
-                          <div class="row">
-                            <form action="./delete-patient" method="POST">
-                              <input type="hidden" name="id" value="<%= patient.id %>">
-                              <button type="submit" class="btn delete-btn"><i class="bi bi-trash"></i></button>
-                            </form>
-                          </div>
-                        </div>
-                      </td>
               </tr>
               <% }) %>
           </tbody>
