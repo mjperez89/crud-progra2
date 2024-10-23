@@ -68,7 +68,7 @@ interface IPatient {
     async list() {
       const parientsRepository = getCustomRepository(PatientRepository);
   
-      const pacientes = await parientsRepository.find();
+      const pacientes = await parientsRepository.find({ relations: ["category"]});
   
       return pacientes;
     }
