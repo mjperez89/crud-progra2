@@ -5,9 +5,8 @@ import path from "path";
 import { productRouter } from "./routes";
 import { userRoutes } from "./routes/userRoutes";
 import { categoryRoutes } from "./routes/CategoryRoutes";
-import { routerAuth } from "./routes/LoginRouters";
-import { facturaRouter } from "./routes/FacturasRoutes"; 
-import { clienteRouter } from "./routes/routerCliente";
+import { routerAuth } from "./routes/LoginRoutes";
+import { patientRouter } from "./routes/PatientsRoutes";
 import "./database";
 import session from "express-session";
 import flash from "connect-flash"
@@ -44,8 +43,7 @@ app.use(productRouter);
 app.use(userRoutes);
 app.use(categoryRoutes);
 app.use(routerAuth);
-app.use(facturaRouter);
-app.use(clienteRouter);
+app.use(patientRouter);
 
 app.use((err: Error, request: Request, response: Response, next: NextFunction) => {
   if (err instanceof Error) {
@@ -65,5 +63,5 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "..", "views"));
 
 app.listen(3000, () => {
-  console.log("Server is running at port 3000");
+  console.log("Server is running at port 3000 in http://localhost:3000/ ");
 });
