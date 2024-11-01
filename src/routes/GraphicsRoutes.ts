@@ -6,7 +6,7 @@ const graphicsRoutes = Router()
 const graphicsController = new GraphicsController()
 
 
-graphicsRoutes.get("/graphics", auth.isLoggedIn, graphicsController.handleListGraphics);
+graphicsRoutes.get("/graphics/index", auth.isLoggedIn, graphicsController.handleListGraphics);
 graphicsRoutes.get("/graphics/data", auth.isLoggedIn, graphicsController.getChartData);
 
 export { graphicsRoutes }

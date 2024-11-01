@@ -172,6 +172,11 @@ body {
   display: block;
 }
 
+.charts {
+  width: 100%;
+  min-height: 400px;
+}
+
 /* #menu a {
   align-items: flex-end;
   color: rgb(247, 247, 247);

@@ -12,6 +12,7 @@ import session from "express-session";
 import flash from "connect-flash"
 import passport from "passport";
 import morgan from "morgan";
+import { graphicsRoutes } from "./routes/GraphicsRoutes";
 
 const app = express();
 
@@ -44,6 +45,7 @@ app.use(userRoutes);
 app.use(categoryRoutes);
 app.use(routerAuth);
 app.use(patientRouter);
+app.use(graphicsRoutes);
 
 app.use((err: Error, request: Request, response: Response, next: NextFunction) => {
   if (err instanceof Error) {
