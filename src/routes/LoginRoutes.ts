@@ -5,9 +5,9 @@ import auth from "../lib/auth";
 const routerAuth = express.Router();
 
 
-// SINGIN (iniciar sesion)
+// SIGNIN (iniciar sesion)
 routerAuth.get('/signin', (request, response) => {
-    response.render('Login/signin');
+    response.render('login/signin');
 });
 
 routerAuth.post('/signin', (request, response, next) => {
