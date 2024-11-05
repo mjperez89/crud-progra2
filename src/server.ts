@@ -7,6 +7,8 @@ import { userRoutes } from "./routes/userRoutes";
 import { categoryRoutes } from "./routes/CategoryRoutes";
 import { routerAuth } from "./routes/LoginRoutes";
 import { patientRouter } from "./routes/PatientsRoutes";
+import { graphicsRouter } from "./routes/GraphicsRoutes";
+import { graphicsService } from './services/GraphicsService';
 import "./database";
 import session from "express-session";
 import flash from "connect-flash"
@@ -44,6 +46,7 @@ app.use(userRoutes);
 app.use(categoryRoutes);
 app.use(routerAuth);
 app.use(patientRouter);
+app.use(graphicsRouter);
 
 app.use((err: Error, request: Request, response: Response, next: NextFunction) => {
   if (err instanceof Error) {

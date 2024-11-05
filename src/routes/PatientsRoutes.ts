@@ -4,15 +4,15 @@ import auth from "../lib/auth";
 
 
 const patientRouter = Router()
-const partientController = new PatientController()
+const patientController = new PatientController()
 
-patientRouter.get("/patient",auth.isLoggedIn, partientController.handleListPatient);
+patientRouter.get("/patient",auth.isLoggedIn, patientController.handleListPatient);
 
-patientRouter.get("/addPatient", auth.isLoggedIn, partientController.handleAddPatient);
-patientRouter.post("/add-patient",auth.isLoggedIn, partientController.handleCreatePatient);
-patientRouter.get("/editPatient",auth.isLoggedIn, partientController.handleGetPatientData);
-patientRouter.post("/edit-patient",auth.isLoggedIn, partientController.handleUpdatePatient);
-patientRouter.post("/delete-patient",auth.isLoggedIn, partientController.handleDeletePatient);
-patientRouter.get("/searchPatient",auth.isLoggedIn, partientController.handleSearchPatient);
+patientRouter.get("/addPatient", auth.isLoggedIn, patientController.handleAddPatient);
+patientRouter.post("/add-patient",auth.isLoggedIn, patientController.handleCreatePatient);
+patientRouter.get("/editPatient",auth.isLoggedIn, patientController.handleGetPatientData);
+patientRouter.post("/edit-patient",auth.isLoggedIn, patientController.handleUpdatePatient);
+patientRouter.post("/delete-patient",auth.isLoggedIn, patientController.handleDeletePatient);
+patientRouter.get("/searchPatient",auth.isLoggedIn, patientController.handleSearchPatient);
 
 export { patientRouter}
