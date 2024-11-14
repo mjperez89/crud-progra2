@@ -9,4 +9,4 @@ const graphicsController = new GraphicsController()
 graphicsRouter.get("/graphics/index", auth.isLoggedIn, graphicsController.handleListGraphics);
 graphicsRouter.get("/graphics/data", auth.isLoggedIn, graphicsController.getChartData);
 
-export { graphicsRouter as graphicsRouter }
+export { graphicsRouter }
