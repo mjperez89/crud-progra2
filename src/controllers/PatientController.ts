@@ -22,7 +22,7 @@ class PatientController{
           id_category
 
         }).then(() => {
-          request.flash("succes", "paciente creado exitosamente")
+          request.flash("success", "paciente creado exitosamente")
           response.redirect("/patient")
           });
         
@@ -53,7 +53,7 @@ class PatientController{
   
       try {
         await deletePatientService.delete(id).then(() => {
-          request.flash("succes", "Paciente eliminado exitosamente")
+          request.flash("success", "Paciente eliminado exitosamente")
           response.redirect("/patient")
           });
         
@@ -131,7 +131,7 @@ class PatientController{
         direccion,
         id_category
       }).then(() => {
-        request.flash("succes", "Paciente actualizado exitosamente")
+        request.flash("success", "Paciente actualizado exitosamente")
           response.redirect("/patient")
         
       });

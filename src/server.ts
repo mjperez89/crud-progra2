@@ -4,7 +4,7 @@ import express, { Request, Response, NextFunction } from "express";
 import path from "path";
 import { productRouter } from "./routes";
 import { userRoutes } from "./routes/userRoutes";
-import { categoryRoutes } from "./routes/CategoryRoutes";
+import { categoryRouter } from "./routes/CategoryRoutes";
 import { routerAuth } from "./routes/LoginRoutes";
 import { patientRouter } from "./routes/PatientsRoutes";
 import { graphicsRouter } from "./routes/GraphicsRoutes";
@@ -34,7 +34,7 @@ app.use(flash())
 
 //Variables Globales
 app.use((request, response, next) => {
-  app.locals.succes = request.flash("succes");
+  app.locals.success = request.flash("success");
   app.locals.error = request.flash("error");
   app.locals.user = request.user
   next()
@@ -43,7 +43,7 @@ app.use((request, response, next) => {
 //Routes
 app.use(productRouter);
 app.use(userRoutes);
-app.use(categoryRoutes);
+app.use(categoryRouter);
 app.use(routerAuth);
 app.use(patientRouter);
 app.use(graphicsRouter);

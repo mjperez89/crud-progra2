@@ -1,6 +1,6 @@
 import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn, JoinColumn, ManyToOne } from "typeorm";
 import { v4 as uuid } from "uuid";
-import { Categorias } from "./Category";
+import { Category } from "./Category";
 
 @Entity("paciente")
 class Patient {
@@ -32,9 +32,9 @@ class Patient {
   @Column()
   id_category: string
 
-  @ManyToOne(() => Categorias, categoria => categoria.patient)
+  @ManyToOne(() => Category, categoria => categoria.patient)
   @JoinColumn({ name: 'id_category' })
-  category: Categorias
+  category: Category
 
   constructor() {
     if (!this.id) {

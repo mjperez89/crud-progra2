@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import { Patient } from "../entities/Patient";
-import { Categorias } from "../entities/Category";
 
 class GraphicsController {
     async handleListGraphics(request: Request, response: Response) {

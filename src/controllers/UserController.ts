@@ -18,7 +18,7 @@ class UserController{
             username,
             password: await helpers.encryptPassword(password)
           }).then(() => {
-            request.flash("succes", "Usuario creado exitosamente")
+            request.flash("success", "Usuario creado exitosamente")
             response.redirect("/users")
             });
           
@@ -37,7 +37,7 @@ class UserController{
     
         try {
           await deleteUserService.delete(id).then(() => {
-            request.flash("succes", "Usuario eliminado exitosamente")
+            request.flash("success", "Usuario eliminado exitosamente")
             response.redirect("/users")
             });
           
@@ -102,7 +102,7 @@ class UserController{
           username, 
           password:  await helpers.encryptPassword(password) 
         }).then(() => {
-          request.flash("succes", "Usuario actualizado exitosamente")
+          request.flash("success", "Usuario actualizado exitosamente")
             response.redirect("/users")
           
         });

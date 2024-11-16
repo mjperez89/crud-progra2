@@ -5,7 +5,7 @@ import auth from "../lib/auth";
 const routerAuth = express.Router();
 
 
-// SIGNIN (iniciar sesion)
+// SIGNIN (iniciar sesión)
 routerAuth.get('/signin', (request, response) => {
     response.render('login/signin');
 });
