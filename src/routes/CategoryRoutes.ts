@@ -9,10 +9,10 @@ categoryRouter.get("/category", auth.isLoggedIn, categoryController.handleListCa
 categoryRouter.get("/addCategory", auth.isLoggedIn, (request, response) => {
     response.render("category/addcategory");
   });
-categoryRouter.post("/add-category", auth.isLoggedIn,categoryController.handleCreateCategory);
+categoryRouter.post("/addCategory", auth.isLoggedIn,categoryController.handleCreateCategory);
 categoryRouter.get("/searchCategory", auth.isLoggedIn, categoryController.handleSearchCategory);
-categoryRouter.post("/edit-category",auth.isLoggedIn, categoryController.handleUpdateCategory);
+categoryRouter.post("/editCategory",auth.isLoggedIn, categoryController.handleUpdateCategory);
 categoryRouter.get("/editCategory", auth.isLoggedIn, categoryController.handleGetCategoryData);
-categoryRouter.post("/delete-category",auth.isLoggedIn, categoryController.handleDeleteCategory);
+categoryRouter.post("/deleteCategory",auth.isLoggedIn, categoryController.handleDeleteCategory);
 
 export { categoryRouter }
