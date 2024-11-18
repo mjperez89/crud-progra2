@@ -5,7 +5,7 @@ import auth from "../lib/auth";
 const userRoutes = Router()
 const userController = new UserController()
 
-userRoutes.get("/users",  auth.isLoggedIn, userController.handleListUsers);
+userRoutes.get("/user",  auth.isLoggedIn, userController.handleListUsers);
 
 userRoutes.get("/addUser", auth.isLoggedIn, (request, response) => {
     response.render("user/add");

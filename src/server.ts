@@ -6,7 +6,7 @@ import { productRouter } from "./routes";
 import { userRoutes } from "./routes/userRoutes";
 import { categoryRouter } from "./routes/CategoryRoutes";
 import { routerAuth } from "./routes/LoginRoutes";
-import { patientRouter } from "./routes/PatientsRoutes";
+import { patientRouter } from "./routes/PatientRoutes";
 import { graphicsRouter } from "./routes/GraphicsRoutes";
 import { graphicsService } from './services/GraphicsService';
 import "./database";

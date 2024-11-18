@@ -9,10 +9,10 @@ const patientController = new PatientController()
 patientRouter.get("/patient",auth.isLoggedIn, patientController.handleListPatient);
 
 patientRouter.get("/addPatient", auth.isLoggedIn, patientController.handleAddPatient);
-patientRouter.post("/add-patient",auth.isLoggedIn, patientController.handleCreatePatient);
+patientRouter.post("/addPatient",auth.isLoggedIn, patientController.handleCreatePatient);
 patientRouter.get("/editPatient",auth.isLoggedIn, patientController.handleGetPatientData);
-patientRouter.post("/edit-patient",auth.isLoggedIn, patientController.handleUpdatePatient);
-patientRouter.post("/delete-patient",auth.isLoggedIn, patientController.handleDeletePatient);
+patientRouter.post("/editPatient",auth.isLoggedIn, patientController.handleUpdatePatient);
+patientRouter.post("/deletePatient",auth.isLoggedIn, patientController.handleDeletePatient);
 patientRouter.get("/searchPatient",auth.isLoggedIn, patientController.handleSearchPatient);
 
 export { patientRouter}
