@@ -2,18 +2,18 @@ import { Router } from "express";
 import { UserController } from "../controllers/UserController";
 import auth from "../lib/auth";
 
-const userRoutes = Router()
+const userRouter = Router()
 const userController = new UserController()
 
-userRoutes.get("/user",  auth.isLoggedIn, userController.handleListUsers);
+userRouter.get("/user",  auth.isLoggedIn, userController.handleListUsers);
 
-userRoutes.get("/addUser", auth.isLoggedIn, (request, response) => {
+userRouter.get("/addUser", auth.isLoggedIn, (request, response) => {
     response.render("user/add");
   });
-userRoutes.post("/add-user",auth.isLoggedIn, userController.handleCreateUser);
-userRoutes.get("/search", auth.isLoggedIn, userController.handleSearchUser);
-userRoutes.post("/edit-user",auth.isLoggedIn, userController.handleUpdateUser);
-userRoutes.get("/editUser", auth.isLoggedIn, userController.handleGetUserData);
-userRoutes.post("/delete-user",auth.isLoggedIn, userController.handleDeleteUser);
+userRouter.post("/addUser",auth.isLoggedIn, userController.handleCreateUser);
+userRouter.get("/searchUser", auth.isLoggedIn, userController.handleSearchUser);
+userRouter.post("/editUser",auth.isLoggedIn, userController.handleUpdateUser);
+userRouter.get("/editUser", auth.isLoggedIn, userController.handleGetUserData);
+userRouter.post("/deleteUser",auth.isLoggedIn, userController.handleDeleteUser);
 
-export { userRoutes }
+export { userRouter }

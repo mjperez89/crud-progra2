@@ -3,12 +3,11 @@ import "express-async-errors";
 import express, { Request, Response, NextFunction } from "express";
 import path from "path";
 import { productRouter } from "./routes";
-import { userRoutes } from "./routes/userRoutes";
+import { userRouter } from "./routes/userRoutes";
 import { categoryRouter } from "./routes/CategoryRoutes";
 import { routerAuth } from "./routes/LoginRoutes";
 import { patientRouter } from "./routes/PatientRoutes";
 import { graphicsRouter } from "./routes/GraphicsRoutes";
-import { graphicsService } from './services/GraphicsService';
 import "./database";
 import session from "express-session";
 import flash from "connect-flash"
@@ -42,7 +41,7 @@ app.use((request, response, next) => {
 
 //Routes
 app.use(productRouter);
-app.use(userRoutes);
+app.use(userRouter);
 app.use(categoryRouter);
 app.use(routerAuth);
 app.use(patientRouter);

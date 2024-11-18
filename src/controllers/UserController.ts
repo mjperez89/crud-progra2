@@ -19,13 +19,13 @@ class UserController{
             password: await helpers.encryptPassword(password)
           }).then(() => {
             request.flash("success", "Usuario creado exitosamente")
-            response.redirect("/users")
+            response.redirect("/user")
             });
           
         } catch (err) {
           request.flash("error", "Error al crear el usuario", err.toString());
           console.log(request.body)
-          response.redirect("/users");
+          response.redirect("/user");
           
         }
     
@@ -38,12 +38,12 @@ class UserController{
         try {
           await deleteUserService.delete(id).then(() => {
             request.flash("success", "Usuario eliminado exitosamente")
-            response.redirect("/users")
+            response.redirect("/user")
             });
           
         } catch (err) {
           request.flash("error", "Error al eliminar el usuario", err.toString());
-          response.redirect("/users");
+          response.redirect("/user");
           
         }
     }
@@ -82,7 +82,7 @@ class UserController{
         });
       } catch (err) {
         request.flash("error", "Error al crear el usuario", err.toString());
-          response.redirect("/users");
+          response.redirect("/user");
         
       }
     }
@@ -103,12 +103,12 @@ class UserController{
           password:  await helpers.encryptPassword(password) 
         }).then(() => {
           request.flash("success", "Usuario actualizado exitosamente")
-            response.redirect("/users")
+            response.redirect("/user")
           
         });
       } catch (err) {
         request.flash("error", "Error al crear el usuario", err.toString());
-          response.redirect("/users");
+          response.redirect("/user");
       }
   
     }  
