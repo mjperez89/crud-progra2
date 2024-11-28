@@ -32,7 +32,7 @@ class Patient {
   @Column()
   id_category: string
 
-  @ManyToOne(() => Category, categoria => categoria.patient)
+  @ManyToOne(() => Category, (categoria) => categoria.patient)
   @JoinColumn({ name: 'id_category' })
   category: Category
 

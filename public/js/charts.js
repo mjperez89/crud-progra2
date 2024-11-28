@@ -8,104 +8,103 @@ async function initCharts() {
     .catch(error => console.error("Error obteniendo datos de gráficos:", error));
 
   // Data para gráfico de Barras
-  const barChartLabels = patientsByProvince.map(item => item.province);
+  // const barChartLabels = patientsByProvince.map(item => item.province);
   const barChartData = patientsByProvince.map(item => item.count);
   // calculamos el valor máximo para cambiar el color
   const maxCount = Math.max(...barChartData);
 
   const barChartOptions = {
-    backgroundColor: 'transparent',
     title: {
-      text: 'Pacientes por provincia',
-      textStyle: {
-        color: '#ffffff'  // Título en blanco
-      }
+      text: 'Pacientes por Provincia',
+      left: 'center',
+      textStyle: { color: '#ffffff' },
+    },
+    backgroundColor: 'transparent',
+    grid: {
+      left: '15%', // Ajustamos para nombre de provincia largos
+      right: '10%',
+      bottom: '10%',
+      top: '15%',
     },
     xAxis: {
-      type: 'category',
-      data: barChartLabels,
-      axisLabel: {
-        color: '#ffffff'  // provs en blanco
-      },
-      axisLine: {
-        lineStyle: {
-          color: '#ffffff'
-        }
-      }
+      type: 'value',
+      axisLabel: { color: '#ffffff' },
+      axisLine: { lineStyle: { color: '#ffffff' } },
+      splitLine: { lineStyle: { color: 'rgba(255, 255, 255, 0.2)' } },
     },
     yAxis: {
-      type: 'value',
-      axisLabel: {
-        color: '#ffffff',  // pacientes en blanco
-        formatter: '{value}',  // muestro solo enteros
-      },
-      axisLine: {
-        lineStyle: {
-          color: '#ffffff'
-        }
-      },
-      splitLine: {
-        lineStyle: {
-          color: 'rgba(255, 255, 255, 0.2)'
-        }
-      },
-      interval: 1,  // defino intervalo de cantidad de pacientes
+      type: 'category',
+      data: patientsByProvince.map(item => item.province),
+      axisLabel: { color: '#ffffff' },
+      axisLine: { lineStyle: { color: '#ffffff' } },
     },
     series: [
       {
-        data: barChartData.map(value => ({
-          value,
+        type: 'bar',
+        data: patientsByProvince.map(item => ({
+          value: item.count,
           itemStyle: {
-            color: value === maxCount ? '#ff0000' : '#6cc24a'  // rojo para el máximo valor, sino verde
-          }
+            color: item.count === maxCount ? '#ff0000' : '#6cc24a', // Marcamos el valor mas alto
+          },
         })),
-        type: 'bar'
-      }
-    ]
+      },
+    ],
   };
 
-  // Data para gráfico de Torta
-  const pieChartData = categoriesByProvince.map(item => ({
-    value: item.count,
-    name: `${item.category} (${item.province})`
-  }));
-
-  const pieChartOptions = {
-    backgroundColor: 'transparent',
+  const treemapChartOptions = {
     title: {
-      text: 'Categorías por provincia',
-      textStyle: {
-        color: '#ffffff'
-      },
-      left: 'center'
+      text: 'Categorías por Provincia',
+      left: 'center',
+      textStyle: { color: '#ffffff' },
     },
+    backgroundColor: 'transparent',
     tooltip: {
-      trigger: 'item',
-      textStyle: {
-        color: '#000000'
-      }
+      formatter: function (info) {
+        const path = info.treePathInfo;
+        const province = path.length > 1 ? path[1].name : 'Provincia sin nombre'; // validamos data
+        const category = path.length > 2 ? path[2].name : 'Categoría sin nombre'; // validamos data
+        return `
+          <strong>Provincia:</strong> ${province}<br>
+          <strong>Categoría:</strong> ${category}<br>
+          <strong>Pacientes:</strong> ${info.value}
+        `;
+      },
+      textStyle: { color: '#000000' },
     },
-    // legend: {
-    //   textStyle: {
-    //     color: '#ffffff'
-    //   }
-    // },
-    series: [
-      {
-        name: 'Categories',
-        type: 'pie',
-        radius: ['40%', '70%'],
-        data: pieChartData,
-        label: {
-          color: '#ffffff'
-        },
-        labelLine: {
-          lineStyle: {
-            color: '#ffffff'
-          }
+    series: {
+      type: 'treemap',
+      data: categoriesByProvince.reduce((result, item) => {
+        const provinceIndex = result.findIndex(prov => prov.name === item.province);
+        if (provinceIndex === -1) {
+          // Agregamos provincia
+          result.push({
+            name: item.province,
+            children: [
+              {
+                name: item.category,
+                value: item.count,
+              },
+            ],
+          });
+        } else {
+          // si existe provincia, agregamos categoría
+          result[provinceIndex].children.push({
+            name: item.category,
+            value: item.count,
+          });
         }
-      }
-    ]
+        return result;
+      }, []),
+      label: {
+        show: true,
+        formatter: '{b}',
+        color: '#ffffff',
+      },
+      itemStyle: {
+        borderColor: '#ffffff',
+        borderWidth: 1,
+      },
+    },
   };
 
   const categoryPieChartData = patientsByCategory.map(item => ({
@@ -131,7 +130,7 @@ async function initCharts() {
       {
         name: 'Categories',
         type: 'pie',
-        radius: ['40%', '70%'],
+        radius: ['20%', '80%'],
         data: categoryPieChartData,
         label: { color: '#ffffff' },
         labelLine: { lineStyle: { color: '#ffffff' } }
@@ -140,8 +139,14 @@ async function initCharts() {
   };
 
   chart1.setOption(barChartOptions);
-  chart2.setOption(pieChartOptions);
+  chart2.setOption(treemapChartOptions);
   chart3.setOption(categoryPieChartOptions);
+
+  window.addEventListener('resize', () => {
+    chart1.resize();
+    chart2.resize();
+    chart3.resize();
+  });
 }
 
 // inicializamos los gráficos luego de que el DOM está cargado
