@@ -3,7 +3,7 @@ import { v4 as uuid } from "uuid";
 import { Patient } from "./Patient";
 
 @Entity("category")
-class Categorias {
+class Category {
 
   @PrimaryColumn()
   id: string;
@@ -27,4 +27,4 @@ class Categorias {
   }
 }
 
-export { Categorias };
+export { Category };

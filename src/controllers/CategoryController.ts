@@ -2,89 +2,97 @@ import { Request, Response } from "express";
 import { CategoryService } from "../services/CategoryService"
 
 class CategoryController{
+  //instanciamos CategoryService global para todos los métodos
+  private categoryService: CategoryService;
+  constructor() {
+    this.categoryService = new CategoryService();
+    this.handleCreateCategory = this.handleCreateCategory.bind(this);
+    this.handleDeleteCategory = this.handleDeleteCategory.bind(this);
+    this.handleGetCategoryData = this.handleGetCategoryData.bind(this);
+    this.handleListCategories = this.handleListCategories.bind(this);
+    this.handleSearchCategory = this.handleSearchCategory.bind(this);
+    this.handleUpdateCategory = this.handleUpdateCategory.bind(this);
+  }
+
     async handleCreateCategory(request: Request, response: Response) {
         const { nombre } = request.body;
     
-        const createCategoryService = new CategoryService();
-
         try {
-          await createCategoryService.create({
+          await this.categoryService.create({  
             nombre
           }).then(() => {
-            request.flash("succes", "Categoria creada exitosamente")
+            request.flash("success", "Categoría creada con éxito")
             response.redirect("/category")
           });
         } catch (err) {
-          request.flash("error", "Error al crear la categoria", err.toString());
+          request.flash("error", "Error al crear la categoría", err.toString());
           response.redirect("/category");
         }
     
     }
+
     async handleDeleteCategory(request: Request, response: Response) {
         const { id } = request.body;
     
-        const deleteCategoryService = new CategoryService();
-    
         try {
-          await deleteCategoryService.delete(id).then(() => {
-            request.flash("succes", "Categoria eliminada exitosamente")
+          await this.categoryService.delete(id).then(() => {
+            request.flash("success", "Categoría eliminada con éxito")
             response.redirect("/category")
           });
         } catch (err) {
-          request.flash("error", "Error al eliminar la categoria", err.toString());
+          request.flash("error", "Error al eliminar la categoría", err.toString());
           response.redirect("/category");
         };
     }
+
     async handleGetCategoryData(request: Request, response: Response) {
       let { id } = request.query;
       id = id.toString();
   
-      const getCategoryDataService = new CategoryService();
-  
-      const category = await getCategoryDataService.getData(id);
+      const category = await this.categoryService.getData(id);
   
       return response.render("category/editcategory", {
         category: category
       });
     }
-    async handleListCategory(request: Request, response: Response) {
-      const listCategoriasService = new CategoryService();
+
+    async handleListCategories(request: Request, response: Response) {
   
-      const categorias = await listCategoriasService.list();
+      const categories = await this.categoryService.list();
   
       return response.render("category/index", {
-        categorias: categorias
+        categories: categories
       });
     }
+    
     async handleSearchCategory(request: Request, response: Response) {
       let { search } = request.query;
       search = search.toString();
   
-      const searchCategoryService = new CategoryService();
-  
       try {
-        const categorias = await searchCategoryService.search(search);
+        const categories = await this.categoryService.search(search);
         response.render("category/searchcategory", {
-          categorias: categorias,
+          categories: categories,
           search: search
         });
       } catch (err) {
-        request.flash("error", "Error al buscar la categoria", err.toString());
+        request.flash("error", "Error al buscar la categoría", err.toString());
           response.redirect("/category");
       };
     }
+
     async handleUpdateCategory(request: Request, response: Response) {
       const { id, nombre } = request.body;
   
-      const updateCategoryService = new CategoryService();
+      // const updateCategoryService = new CategoryService();
   
       try {
-        await updateCategoryService.update({ id, nombre }).then(() => {
-          request.flash("succes", "Categoria modificada exitosamente")
+        await this.categoryService.update({ id, nombre }).then(() => {
+          request.flash("success", "Categoría modificada con éxito")
             response.redirect("/category")
           });
         } catch (err) {
-          request.flash("error", "Error al actualizar la categoria", err.toString());
+          request.flash("error", "Error al actualizar la categoría", err.toString());
           response.redirect("/category");
         };
   

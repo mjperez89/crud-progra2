@@ -4,7 +4,7 @@ class auth {
       if (request.isAuthenticated()) {
           return next();
       }
-      request.flash("error", "No autorizado, debe iniciar sesion")
+      request.flash("error", "No autorizado, debe iniciar sesión")
       return response.redirect('/signin');
   };
 

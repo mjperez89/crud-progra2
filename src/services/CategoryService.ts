@@ -1,6 +1,6 @@
 import { getCustomRepository } from "typeorm";
-import { Categorias } from "../entities/Category";
-import { CategoriasRepository } from "../repositories/CategoriasRepository"
+import { Category } from "../entities/Category";
+import { CategoryRepository } from "../repositories/CategoryRepository"
 
 
 interface ICategory {
@@ -11,49 +11,49 @@ interface ICategory {
 class CategoryService {
   async create({ nombre, }: ICategory) {
     if (!nombre) {
-      throw new Error("Por favor rellene todos los campos.");
+      throw new Error("Por favor rellene todos los campos ");
     }
-    const categoriasRepository = getCustomRepository(CategoriasRepository);
-    const categorynameAlreadyExists = await categoriasRepository.findOne({ nombre });
+    const categoryRepository = getCustomRepository(CategoryRepository);
+    const categoryNameAlreadyExists = await categoryRepository.findOne({ nombre });
 
-    if (categorynameAlreadyExists) {
-      throw new Error("La Categoria ya ha sido creado");
+    if (categoryNameAlreadyExists) {
+      throw new Error("La categoría ya ha sido creada");
     }
 
-    const category = categoriasRepository.create({ nombre });
+    const category = categoryRepository.create({ nombre });
     console.log(category)
 
-    await categoriasRepository.save(category);
+    await categoryRepository.save(category);
 
     return category;
   }
 
   async delete(id: string) {
-    const categoriasRepository = getCustomRepository(CategoriasRepository);
+    const categoryRepository = getCustomRepository(CategoryRepository);
 
-    const category = await categoriasRepository
+    const category = await categoryRepository
       .createQueryBuilder()
       .delete()
-      .from(Categorias)
+      .from(Category)
       .where("id = :id", { id })
       .execute();
 
     return category;
 
   }
-// hasta aqui llegue//
-  async getData(id: string) {
-    const categoriasRepository = getCustomRepository(CategoriasRepository);
 
-    const category = await categoriasRepository.findOne(id);
+  async getData(id: string) {
+    const categoryRepository = getCustomRepository(CategoryRepository);
+
+    const category = await categoryRepository.findOne(id);
 
     return category;
   }
 
   async list() {
-    const categoriasRepository = getCustomRepository(CategoriasRepository);
+    const categoryRepository = getCustomRepository(CategoryRepository);
 
-    const categorias = await categoriasRepository.find();
+    const categorias = await categoryRepository.find();
 
     return categorias;
   }
@@ -63,9 +63,9 @@ class CategoryService {
       throw new Error("Por favor rellene todos los campos");
     }
 
-    const categoriasRepository = getCustomRepository(CategoriasRepository);
+    const categoryRepository = getCustomRepository(CategoryRepository);
 
-    const category = await categoriasRepository
+    const category = await categoryRepository
       .createQueryBuilder()
       .where("nombre like :search", { search: `%${search}%` })      
       .getMany();
@@ -75,11 +75,11 @@ class CategoryService {
   }
 
   async update({ id, nombre }: ICategory) {
-    const categoriasRepository = getCustomRepository(CategoriasRepository);
+    const categoryRepository = getCustomRepository(CategoryRepository);
 
-    const category = await categoriasRepository
+    const category = await categoryRepository
       .createQueryBuilder()
-      .update(Categorias)
+      .update(Category)
       .set({ nombre })
       .where("id = :id", { id })
       .execute();

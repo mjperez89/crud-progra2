@@ -23,7 +23,7 @@ passport.use('local.signin', new LocalStrategy({
         const user:User = busqueda[0];
         const validPassword = await helpers.matchPassword(password, user.password)
         if (validPassword) {
-            request.flash("success", "Bienvenido " , user.name)
+            request.flash("successs", "Bienvenido " , user.name)
             done(null, user);
         } else {
             request.flash("error", "Contraseña incorrecta")
@@ -35,7 +35,7 @@ passport.use('local.signin', new LocalStrategy({
     }
 }));
 
-// Creacion de usuario
+// Creación de usuario
 
 passport.use('local.signup', new LocalStrategy({
     usernameField: 'username',
@@ -59,7 +59,7 @@ passport.use('local.signup', new LocalStrategy({
     const userService = new UserService()
     try {
         await userService.create(newUser).then((result) => {
-            request.flash("success", 'Usuario creado con éxito');
+            request.flash("successs", 'Usuario creado con éxito');
             return done(null, result);
         });
     } catch (err) {
