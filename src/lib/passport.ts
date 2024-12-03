@@ -43,7 +43,7 @@ passport.use('local.signup', new LocalStrategy({
     passReqToCallback: true
 }, async (request, username, password, done) => {
 
-    const { name, telefono, email, provincia, ciudad} = request.body;
+    const { name, telefono, email, provincia, ciudad, admin} = request.body;
     const newUser = {
         name,  
         username,
@@ -51,7 +51,8 @@ passport.use('local.signup', new LocalStrategy({
         email,
         telefono,
         provincia,
-        ciudad
+        ciudad,
+        admin
 }
 
     newUser.password = await helpers.encryptPassword(password);

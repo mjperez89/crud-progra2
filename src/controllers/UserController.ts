@@ -4,7 +4,7 @@ import { UserService } from "../services/UserService"
 
 class UserController{
     async handleCreateUser(request: Request, response: Response) {
-        const { name, email, telefono, provincia, ciudad, username, password } = request.body;
+        const { name, email, telefono, provincia, ciudad, username, password, admin } = request.body;
     
         const createUserService = new UserService();
     
@@ -16,7 +16,9 @@ class UserController{
             provincia,
             ciudad,
             username,
-            password: await helpers.encryptPassword(password)
+            password: await helpers.encryptPassword(password),
+            admin
+
           }).then(() => {
             request.flash("success", "Usuario creado exitosamente")
             response.redirect("/user")
@@ -87,7 +89,7 @@ class UserController{
       }
     }
     async handleUpdateUser(request: Request, response: Response) {
-      const { id, name, email, telefono, provincia, ciudad, username, password } = request.body;
+      const { id, name, email, telefono, provincia, ciudad, username, password, admin } = request.body;
   
       const updateUserService = new UserService();
   
@@ -100,7 +102,9 @@ class UserController{
           provincia, 
           ciudad, 
           username, 
-          password:  await helpers.encryptPassword(password) 
+          password:  await helpers.encryptPassword(password),
+          admin
+          
         }).then(() => {
           request.flash("success", "Usuario actualizado exitosamente")
             response.redirect("/user")
