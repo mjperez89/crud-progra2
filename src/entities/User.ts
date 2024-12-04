@@ -35,6 +35,9 @@ class User {
   @UpdateDateColumn()
   updated_at: Date;
 
+  @Column({default: false})
+  admin: boolean
+
   constructor() {
     if (!this.id) {
       this.id = uuid();

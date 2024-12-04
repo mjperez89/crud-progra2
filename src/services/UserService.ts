@@ -12,12 +12,13 @@ interface IUser {
     ciudad: string;
     username: string;
     password: string;
+    admin: boolean;
   }
 
 
 class UserService {
-
-  async create({ name, email, telefono, provincia, ciudad, username, password }: IUser) {
+  
+  async create({ name, email, telefono, provincia, ciudad, username, password, admin }: IUser) {
     if (!name || !email || !telefono || !provincia || !ciudad || !username || !password) {
       throw new Error("Por favor rellene todos los campos.");
     }
@@ -35,8 +36,12 @@ class UserService {
     if (emailAlreadyExists) {
       throw new Error("El mail de usuario ingresado ya existe");
     }
-
-    const user = usersRepository.create({ name, email, telefono, provincia, ciudad, username, password });
+    
+    if (admin) {
+      admin = true;
+    };
+    
+    const user = usersRepository.create({ name, email, telefono, provincia, ciudad, username, password, admin });
     console.log(user)
 
     await usersRepository.save(user);
@@ -105,13 +110,19 @@ class UserService {
 
   }
 
-  async update({ id, name, email, telefono, provincia, ciudad, username, password }: IUser) {
+  async update({ id, name, email, telefono, provincia, ciudad, username, password, admin }: IUser) {
     const usersRepository = getCustomRepository(UsersRepository);
+
+    if (admin) {
+      admin = true;
+    } else {
+      admin = false;
+    };
 
     const user = await usersRepository
       .createQueryBuilder()
       .update(User)
-      .set({ name, email, telefono, provincia, ciudad, username, password })
+      .set({ name, email, telefono, provincia, ciudad, username, password, admin })
       .where("id = :id", { id })
       .execute();
 

@@ -93,7 +93,7 @@ body {
 .container1 .box1 {
   position: relative;
   width: 320px;
-  height: 400px;
+  height: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
