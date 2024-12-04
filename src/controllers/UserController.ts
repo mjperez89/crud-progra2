@@ -5,9 +5,9 @@ import { UserService } from "../services/UserService"
 class UserController{
     async handleCreateUser(request: Request, response: Response) {
         const { name, email, telefono, provincia, ciudad, username, password, admin } = request.body;
-    
+        
         const createUserService = new UserService();
-    
+        
         try {
           await createUserService.create({
             name,
