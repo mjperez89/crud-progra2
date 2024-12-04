@@ -1,4 +1,4 @@
-# CRUD Node.js
+# Ministerio de Salud
 CRUD made with Node.js, Express, TypeScript, TypeORM, EJS &amp; SQLite.
 
 ![Home page image](https://github.com/sinvalbsneto/crud_nodejs/blob/main/public/img/home.png)
