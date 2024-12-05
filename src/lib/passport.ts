@@ -30,7 +30,7 @@ passport.use('local.signin', new LocalStrategy({
             done(null, false);
         }
     } else {
-        request.flash("error", "El usuario no existe.")
+        request.flash("error", "El usuario no existe, por favor reintente.")
         return done(null, false);
     }
 }));
