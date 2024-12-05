@@ -24,11 +24,11 @@
         <h2>Edición de Usuario</h2>
       </div>
       <form action="./editUser" method="POST">
-        <input type="hidden" name="id" value="<%= user.id %>">
+        <input type="hidden" name="id" value="<%= editUser.id %>">
         <div class="row">
           <div class="col-12">
             <label for="name" class="form-label text-white">Nombre</label>
-            <input type="text" name="name" id="name" class="form-control" value="<%= user.name %>" required
+            <input type="text" name="name" id="name" class="form-control" value="<%= editUser.name %>" required
               autocomplete="off">
           </div>
         </div>
@@ -36,37 +36,36 @@
         <div class="row">
           <div class="col-6">
             <label for="username" class="form-label text-white">Usuario</label>
-            <input type="text" name="username" id="username" class="form-control" value="<%= user.username %>" required
+            <input type="text" name="username" id="username" class="form-control" value="<%= editUser.username %>" required
               autocomplete="off">
           </div>
           <div class="col-6">
-            <label for="password" class="form-label text-white">Contraseña</label>
-            <input type="password" name="password" id="password" class="form-control" value="<%= user.password %>"
-              required autocomplete="off">
+            <label for="password" class="form-label text-white">Nueva Contraseña</label>
+            <input type="password" name="password" id="password" class="form-control" placeholder="Dejar vacío para no cambiar">
           </div>
         </div>
         <br>
         <div class="row">
           <div class="col-6">
             <label for="email" class="form-label text-white">Email</label>
-            <input type="text" name="email" id="email" class="form-control" value="<%= user.email %>">
+            <input type="text" name="email" id="email" class="form-control" value="<%= editUser.email %>">
           </div>
           <div class="col-6">
             <label for="telefono" class="form-label text-white">Teléfono</label>
-            <input type="text" name="telefono" id="telefono" class="form-control" value="<%= user.telefono %>">
+            <input type="text" name="telefono" id="telefono" class="form-control" value="<%= editUser.telefono %>">
           </div>
         </div>
         <br>
         <div class="row">
           <div class="col-6">
             <label for="ciudad" class="form-label text-white">Ciudad</label>
-            <input type="text" name="ciudad" id="ciudad" class="form-control" value="<%= user.ciudad %>">
+            <input type="text" name="ciudad" id="ciudad" class="form-control" value="<%= editUser.ciudad %>">
           </div>
           <div class="col-6">
             <label for="provincia" class="form-label text-white">Provincia</label>
             <select name="provincia" id="provincia" class="form-select">
-              <option value="<%= user.provincia %>" selected>
-                <%= user.provincia %>
+              <option value="<%= editUser.provincia %>" selected>
+                <%= editUser.provincia %>
               </option>
               <option value="MZA">Mendoza</option>
               <option value="SL">San Luis</option>

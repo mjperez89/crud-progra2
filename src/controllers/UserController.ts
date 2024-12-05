@@ -58,7 +58,7 @@ class UserController{
       const user = await getUserDataService.getData(id);
   
       return response.render("user/edit", {
-        user: user
+        editUser: user
       });
     }
     async handleListUsers(request: Request, response: Response) {
